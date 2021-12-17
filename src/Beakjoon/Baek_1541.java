@@ -12,15 +12,15 @@ public class Baek_1541 {
         int sum = Integer.MAX_VALUE;
         String[] cal = br.readLine().split("-");
 
-        for (int i = 0; i < cal.length; i++) {
+        for (String s : cal) {
             int temp = 0;
-            String[] plus = cal[i].split("\\+");
+            String[] plus = s.split("\\+");
 
-            for (int j = 0; j < plus.length; j++) {
-                temp += Integer.parseInt(plus[j]);
+            for (String value : plus) {
+                temp += Integer.parseInt(value);
             }
 
-            if(sum == Integer.MAX_VALUE) {
+            if (sum == Integer.MAX_VALUE) {
                 sum = temp;
             } else {
                 sum -= temp;
