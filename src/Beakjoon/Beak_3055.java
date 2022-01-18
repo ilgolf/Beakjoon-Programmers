@@ -44,18 +44,18 @@ public class Beak_3055 {
             // 물 부터 이동(큐에서 꺼냄)
             P cur = queue.poll();
 
-            // 목적지 인가?
+            // 목적지 인가? (type S가 type D에 도착)
             if (map[cur.x][cur.y] == 'D' && cur.type == 'S') {
                 return String.valueOf(cur.count);
             }
 
-            // 인접 행렬 순회
+            // 물 부터 인접 행렬 순회
             if (cur.type == '*') {
                 for (int i = 0; i < 4; i++) {
                     int nx = cur.x + moving[i][0];
                     int ny = cur.y + moving[i][1];
 
-                    // 물 갈 수 있는가?
+                    // 물 갈 수 있는가? (범위, .인지)
                     if (nx >= 0 && ny >= 0 && nx < r && ny < c) {
                         if (map[nx][ny] == '.') {
                             // 체크인 : 물
@@ -72,7 +72,7 @@ public class Beak_3055 {
                     int nx = cur.x + moving[i][0];
                     int ny = cur.y + moving[i][1];
 
-                    // 고슴도치 갈 수 있는가?
+                    // 고슴도치 갈 수 있는가? (범위, 방문 여부, .과 D만 갈 수 있다.)
                     if (nx >= 0 && ny >= 0 && nx < r && ny < c) {
                         if (!checked[nx][ny]) {
                             if (map[nx][ny] == '.' || map[nx][ny] == 'D') {

@@ -22,7 +22,7 @@ public class Beak_1759 {
 
     static void dfs(int depth, int length, String comb) {
         // 1. 체크인 - 생략 가능
-        // 2. 목적지인가? - 길이 + 자음, 모음 개수
+        // 2. 목적지 인가? - 길이 + 자음, 모음 개수
         if (length == 0) {
             if (isPassword(comb)) {
                 sb.append(comb).append('\n');
@@ -33,10 +33,12 @@ public class Beak_1759 {
         if (depth == c) return;
 
         // 연결된 곳을 순회 - 나보다 높은 알파벳
+        // 갈 수 있는가 생략 : 정렬된 상태 이므로 검색할 조건이 없다.
         dfs(depth + 1, length - 1, comb + stArr[depth]);
 
-        // 6. 체크 아웃
         dfs(depth + 1, length, comb);
+
+        // 체크 아웃 생략 가능
     }
 
     // 모음 확인
