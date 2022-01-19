@@ -45,7 +45,7 @@ public class Beak_2805 {
                 left = mid + 1;
             }
 
-            // sum < m : left = mid - 1
+            // sum < m : right = mid - 1
             else {
                 right = mid - 1;
             }
