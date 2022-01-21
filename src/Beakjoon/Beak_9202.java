@@ -37,28 +37,22 @@ public class Beak_9202 {
         void clearHit() {
             isHit = false;
             for (int i = 0; i < child.length; i++) {
-                Trie cur = child[i];
+                if (child[i] != null) {
+                    child[i].clearHit();
+                }
             }
         }
     }
 
-    static int w, b;
+    static int w, b, sum, count;
+    static String answer;
     static Trie root = new Trie();
     static boolean[][] checked;
     static char[][] map;
-    static StringBuilder sb = new StringBuilder();
-    static int[][] moving = {
-            {1, 0},
-            {-1, 0},
-            {0, 1},
-            {0, -1},
-            {1, 1},
-            {-1, -1},
-            {-1, 1},
-            {1, -1}
-    };
-
-    static int[] score = {0, 0, 0};
+    static StringBuilder sb;
+    static int[][] moving = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, -1}, {-1, 1}, {1, -1}};
+    static int[] score = {0, 0, 0, 1, 1, 2, 3, 5, 11};
+    static StringBuilder resultSb = new StringBuilder();
 
     static void dfs(int x, int y, int length, Trie node) {
         // 1. 체크인
@@ -69,7 +63,14 @@ public class Beak_9202 {
             node.isHit = true;
 
             // 추가 답 처리
+            sum += score[length];
+            count ++;
+            String foundWord = sb.toString();
+            if (compare(answer, foundWord) > 0) {
+                answer = foundWord;
+            }
         }
+
         // 3. 연결된 곳 순회
         for (int i = 0; i < 8; i++) {
             int nx = x + moving[i][0];
@@ -88,6 +89,16 @@ public class Beak_9202 {
         sb.deleteCharAt(length - 1);
     }
 
+    private static int compare(String answer, String foundWord) {
+        int result = Integer.compare(foundWord.length(), answer.length());
+
+        if (result == 0) {
+            return answer.compareTo(foundWord);
+        } else {
+            return result;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -97,11 +108,18 @@ public class Beak_9202 {
             root.insert(br.readLine());
         }
 
+        br.readLine();
+
         b = Integer.parseInt(br.readLine());
 
         while (b-- > 0) {
             checked = new boolean[4][4];
             map = new char[4][4];
+            answer = "";
+            sum = 0;
+            count = 0;
+            sb = new StringBuilder();
+
 
             for (int i = 0; i < 4; i++) {
                 String line = br.readLine();
@@ -109,8 +127,6 @@ public class Beak_9202 {
                     map[i][j] = line.charAt(j);
                 }
             }
-
-            br.readLine();
 
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
@@ -120,6 +136,21 @@ public class Beak_9202 {
                     }
                 }
             }
+
+            resultSb
+                    .append(sum)
+                    .append(" ")
+                    .append(answer)
+                    .append(" ")
+                    .append(count)
+                    .append('\n');
+
+            root.clearHit();
+            if (b != 0) {
+                br.readLine();
+            }
         }
+
+        System.out.println(resultSb);
     }
 }

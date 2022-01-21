@@ -11,11 +11,12 @@ public class Beak_14476 {
     static int[] nums;
 
     static int gcd(int a, int b) {
-        if (b == 0) {
-            return a;
+        while (b != 0) {
+            int temp = a % b;
+            a = b;
+            b = temp;
         }
-
-        return gcd(b, a % b);
+        return a;
     }
 
     public static void main(String[] args) throws IOException {
@@ -30,11 +31,11 @@ public class Beak_14476 {
             nums[i] = Integer.parseInt(st.nextToken());
         }
 
-        int[] lr = new int[n];
-        int[] rl = new int[n];
+        int[] lr = new int[n + 2];
+        int[] rl = new int[n + 2];
 
         lr[0] = nums[0];
-        rl[0] = nums[nums.length - 1];
+        rl[n - 1] = nums[nums.length - 1];
 
         // LR
         for (int i = 1; i < nums.length; i++) {
@@ -43,7 +44,7 @@ public class Beak_14476 {
 
         // RL
         for (int i = nums.length - 2; i >= 0; i--) {
-            rl[i] = gcd(lr[i + 1], nums[i]);
+            rl[i] = gcd(rl[i + 1], nums[i]);
         }
 
         int max = 0;
@@ -52,12 +53,13 @@ public class Beak_14476 {
             int gcd;
 
             if (i == 0) {
-                gcd = lr[1];
+                gcd = rl[1];
             } else if (i == n - 1) {
-                gcd = rl[n - 2];
+                gcd = lr[n - 2];
             } else {
                 gcd = gcd(lr[i - 1], rl[i + 1]);
             }
+
 
             if (nums[i] % gcd != 0 && gcd > max) {
                 max = gcd;
@@ -67,8 +69,8 @@ public class Beak_14476 {
 
         if (max == 0) {
             System.out.println(-1);
+        } else {
+            System.out.println(max + " " + nums[maxIndex]);
         }
-
-        System.out.println(nums[maxIndex] + " " + maxIndex);
     }
 }
