@@ -77,6 +77,8 @@ public class Beak_5719 {
 
             dijkstra(start, end);
             backTracking(start, end);
+
+            // 3. 다익스트라로 가능한 경로 중 가장 빠른 길을 찾는다.
             dijkstra(start, end);
 
             if (dist[end] == INF) {
@@ -89,6 +91,7 @@ public class Beak_5719 {
         System.out.println(sb);
     }
 
+    // 2. 최단경로들을 지운다. : DFS를 활용하여 도착지 D에서부터 출발지 S로 경로를 백트래킹
     private static void backTracking(int start, int now) {
         if (start == now) {
             return;

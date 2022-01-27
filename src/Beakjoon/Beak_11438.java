@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -96,7 +95,6 @@ public class Beak_11438 {
     }
 
     private static int getLCA(int a, int b) {
-
         // depth[a] < depth[b] 일 경우 더 탐색
         if (depth[a] < depth[b]) {
             return getLCA(b, a);
