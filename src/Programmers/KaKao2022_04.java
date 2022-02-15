@@ -12,13 +12,6 @@ public class KaKao2022_04 {
     static int[] result = {-1};
     static int[] ryan = new int[11];
 
-    public static void main(String[] args) {
-        int n = 5;
-        int[] info = {2,1,1,1,0,0,0,0,0,0,0};
-
-        System.out.println(Arrays.toString(solution(n, info)));
-    }
-
     public static int[] solution(int n, int[] info) {
         int[] ryan = new int[11]; // 점수를 담을 List배열
 
