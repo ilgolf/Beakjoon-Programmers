@@ -31,7 +31,7 @@ public class BoxerSort {
     static Map<Integer, Integer> map = new HashMap<>(); // 복서 인덱스와 몸무게 저장
 
     static boxer game(int weight, String round, int num) {
-        double win = 0, lose = 0, none = 0;
+        double win = 0, none = 0;
         int cnt = 0;
 
         int idx = 0;
@@ -45,12 +45,11 @@ public class BoxerSort {
                     none +=1;
                     break;
                 case 'L':
-                    lose +=1;
                     break;
             }
             idx ++;
         }
-        double cal = (win/(double)(round.length() - none));
+        double cal = (win/ (round.length() - none));
 
         return new boxer(Double.isNaN(cal) ? 0 : cal, cnt, num, weight);
     }

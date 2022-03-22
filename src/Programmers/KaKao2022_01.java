@@ -26,9 +26,9 @@ public class KaKao2022_01 {
             ids.put(line[1], ids.getOrDefault(line[1], 0) + 1);
         }
 
-        for (String key : ids.keySet()) {
-            System.out.println(ids.get(key));
-        }
+//        for (String key : ids.keySet()) {
+//            System.out.println(ids.get(key));
+//        }
 
 
         for (String repo : duplicateCheck) {
